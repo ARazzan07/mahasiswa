@@ -1,7 +1,11 @@
 @extends('layout.menu')
 @section('konten')
 
-<a href="{{ route('mahasiswa.create') }}" title="Tambah data">Tambah Data</a>
+
+
+<a href="{{ route('mahasiswa.create') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
+<a href="{{ route('excel') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
+<a href="{{ route('pdf') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
 <table class="table table table-bordered"  id="table">
     <thead class="thead-dark">
         <tr>

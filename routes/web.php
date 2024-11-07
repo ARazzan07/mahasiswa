@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cmahasiswa;
 use App\Http\Controllers\Cfakultas;
 use App\Http\Controllers\Clogin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +29,8 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('mahasiswa', Cmahasiswa::class);
 
 Route::resource('fakultas', Cfakultas::class);
+
+Route::get('/export-pdf', [Cmahasiswa::class, 'exportPdf'])->name('pdf');
+Route::get('/export-excel', [Cmahasiswa::class, 'exportExcel'])->name('excel');
 
 });

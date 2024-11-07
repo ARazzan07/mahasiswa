@@ -6,6 +6,10 @@ use App\Models\Mmahasiswa;
 use App\Models\Mfakultas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
+use App\Exports\TableExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class Cmahasiswa extends Controller
 {
@@ -18,6 +22,7 @@ class Cmahasiswa extends Controller
             ->leftJoin('fakultas', 'mahasiswa.fakultas_id', '=', 'fakultas.id')
             ->select('mahasiswa.*', 'fakultas.fakultas','fakultas.prodi','fakultas.kaprodi')
             ->get();
+
             return view ('mahasiswa.index', compact('mahasiswa'));
     }
 
@@ -96,4 +101,25 @@ class Cmahasiswa extends Controller
         return redirect()->route('mahasiswa.index')->with('success', 'Data siswa berhasil
 diupdate');
     }
+
+    
+    public function exportPdf()
+    {
+        $datas = DB::table('mahasiswa')
+        ->leftJoin('fakultas', 'mahasiswa.fakultas_id', '=', 'fakultas.id')
+        ->select('mahasiswa.*', 'fakultas.fakultas','fakultas.prodi','fakultas.kaprodi')
+        ->get(); // Retrieve data for the table
+    
+        // Load the view and pass data
+        $pdf = PDF::loadView('pdf.mahasiswa', compact('datas'));
+    
+        // Return PDF download
+        return $pdf->stream('table.pdf');
+    }
+    
+        public function exportExcel()
+    {
+        return Excel::download(new TableExport, 'table.xlsx');
+    }
+
 }
