@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Cmahasiswa;
+use App\Http\Controllers\Cfakultas;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('mahasiswa', Cmahasiswa::class);
+
+Route::resource('fakultas', Cfakultas::class);
