@@ -12,7 +12,8 @@ class Cfakultas extends Controller
      */
     public function index()
     {
-        //
+        $fakultas = Mfakultas::get();
+        return view ('fakultas.index', compact('fakultas'));
     }
 
     /**
@@ -20,7 +21,7 @@ class Cfakultas extends Controller
      */
     public function create()
     {
-        //
+        return view('fakultas.tambah');
     }
 
     /**
@@ -28,7 +29,15 @@ class Cfakultas extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mfakultas::create([
+            'fakultas'    => $request->fakultas,
+            'prodi'    => $request->prodi,
+            'kaprodi'   => $request->kaprodi,
+            
+        ]);
+
+        return redirect()->route('fakultas.index')->with('success', 'Data fakultas berhasil
+disimpan');
     }
 
     /**
@@ -42,24 +51,38 @@ class Cfakultas extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mfakultas $mfakultas)
+    public function edit(string $id)
     {
-        //
+        $fakultas = Mfakultas::findOrFail($id);
+        return view('fakultas.edit', compact('fakultas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mfakultas $mfakultas)
+    public function update(Request $request, string $id)
     {
-        //
+        $fakultas = Mfakultas::findOrFail($id);
+
+        $fakultas->update([
+            'fakultas'    => $request->fakultas,
+            'prodi'    => $request->prodi,
+            'kaprodi'   => $request->kaprodi,
+            
+        ]);
+
+        return redirect()->route('fakultas.index')->with('success', 'Data fakultas berhasil
+disimpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mfakultas $mfakultas)
+    public function destroy(string $id)
     {
-        //
+        $fakultas = Mfakultas::findOrFail($id);
+        $fakultas->delete();
+        return redirect()->route('fakultas.index')->with('success', 'Data siswa berhasil
+diupdate');
     }
 }

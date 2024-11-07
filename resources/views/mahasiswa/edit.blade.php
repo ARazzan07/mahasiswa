@@ -13,7 +13,7 @@
 
     <div class="form-group">
         <label for="nama_lengkap">Nama Lengkap:</label>
-        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required value="{{ old('nama_lengkap', $mahasiswa->nama_lengkap) }}">
+        <input type="text" name="nama" id="nama" class="form-control" required value="{{ old('nama', $mahasiswa->nama) }}">
     </div>
 
     <div class="form-group">
@@ -41,6 +41,16 @@
             <option value="">~Pilih~</option>
             <option value="Laki-laki" {{ $mahasiswa->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
             <option value="Perempuan" {{ $mahasiswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tanggal_lahir">Fakultas</label>
+        <select name="fakultas_id" id="" class="form-control" required>
+            <option value="">~Pilih~</option>
+            @foreach ($fakultas as $f)
+            <option value="{{$f->id}}" {{$mahasiswa->fakultas_id == $f->id ? 'selected' : ''}}>{{$f->prodi}}</option>
+            @endforeach
         </select>
     </div>
 

@@ -12,12 +12,12 @@
 
     <div class="form-group">
         <label for="nama">Nama Lengkap:</label>
-        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" required>
+        <input type="text" name="nama" id="nama" class="form-control" required>
     </div>
 
     <div class="form-group">
         <label for="jk">Jenis Kelamin:</label>
-        <select name="jk" id="jk" class="form-control" required>
+        <select name="jenis_kelamin" id="jk" class="form-control" required>
             <option value="">~Pilih~</option>
             <option value="Laki-laki">Laki-laki</option>
             <option value="Perempuan">Perempuan</option>
@@ -32,6 +32,16 @@
     <div class="form-group">
         <label for="tanggal_lahir">Tanggal Lahir:</label>
         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label for="tanggal_lahir">Fakultas</label>
+        <select name="fakultas_id" id="" class="form-control" required>
+            <option value="">~Pilih~</option>
+            @foreach ($fakultas as $f)
+            <option value="{{$f->id}}">{{$f->prodi}}</option>
+            @endforeach
+        </select>
     </div>
     
     <div class="form-group">

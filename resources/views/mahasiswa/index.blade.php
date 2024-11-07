@@ -2,8 +2,8 @@
 @section('konten')
 
 <a href="{{ route('mahasiswa.create') }}" title="Tambah data">Tambah Data</a>
-<table>
-    <thead>
+<table class="table table table-bordered"  id="table">
+    <thead class="thead-dark">
         <tr>
             <th>No</th>
             <th>NIM</th>
@@ -11,6 +11,9 @@
             <th>Jenis Kelamin</th>
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
+            <th>Fakultas</th>
+            <th>Prodi</th>
+            <th>Kaprodi</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -19,10 +22,13 @@
         <tr>
             <td> {{ $loop->iteration }} </td>
             <td> {{ $d->nim }} </td>
-            <td> {{ $d->nama_lengkap }} </td>
+            <td> {{ $d->nama }} </td>
             <td> {{ $d->jenis_kelamin }} </td>
             <td> {{ $d->tempat_lahir }} </td>
             <td> {{ $d->tanggal_lahir }} </td>
+            <td> {{ $d->fakultas }} </td>
+            <td> {{ $d->prodi }} </td>
+            <td> {{ $d->kaprodi }} </td>
             <td>
                 <form onsubmit="return confirm('Yakin hapus data?');" method="POST" action="{{ route('mahasiswa.destroy', $d->id) }}">
                     @csrf
