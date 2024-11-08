@@ -68,6 +68,22 @@
             {{ $message }} 
             @enderror
     </div>
+
+    <div class="form-group">
+        <label for="nama">Lat:</label>
+        <input type="double" name="lat" id="nama" class="form-control" required>
+        @error('lat')
+            {{ $message }} 
+            @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="nama">Long:</label>
+        <input type="double" name="long" id="nama" class="form-control" required>
+        @error('long')
+            {{ $message }} 
+            @enderror
+    </div>
     
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Simpan</button>

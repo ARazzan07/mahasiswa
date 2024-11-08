@@ -1,3 +1,6 @@
+@extends('layout.menu')
+@section('konten')
+
 <form action="{{ route('login_proses') }}" method="post">
     @csrf
     <div class="form-group">
@@ -21,3 +24,5 @@
     <br />
     <button type="submit" class="btn btn-block">Login</button>
 </form>
+
+@endsection

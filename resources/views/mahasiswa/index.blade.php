@@ -6,6 +6,7 @@
 <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
 <a href="{{ route('mahasiswa.excel') }}" class="btn btn-primary" title="Export to EXCEL"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
 <a href="{{ route('mahasiswa.pdf') }}" class="btn btn-primary" title="Export to PDF"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
+<a href="{{ route('maps') }}" class="btn btn-primary" title="Buka Map"><i class="far fa-plus-square"></i> &nbsp;Buka Map Mahasiswa</a>
 <div style="overflow-x: auto; max-width: 100%; ">
 <table class="table table table-bordered"  id="table"  style="width: 100%; min-width: 1500px; table-layout: auto;">
     <thead class="thead-dark">

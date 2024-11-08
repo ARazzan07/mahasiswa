@@ -5,10 +5,12 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="csrf-token" content="{{ csrf_token() }}">
    <title>MAHASISWA</title>
    <meta name="author" content="">
    <meta name="description" content="">
    <meta name="keywords" content="">
+   
 
    <link rel="icon" href="favicon.png" type="image/png">
 
@@ -46,7 +48,7 @@
          <a href="#" class="navbar--btn" data-toggle="sidebar" title="Toggle Sidebar">
             <i class="fa fa-bars"></i>
          </a>
-
+         @if (Auth::check() && in_array(Auth::user()->level, ['admin', 'user'])) 
          <div class="navbar--nav ml-auto">
             <ul class="nav">
                <li class="nav-item dropdown nav--user online">
@@ -61,6 +63,7 @@
                </li>
             </ul>
          </div>
+         @endif
       </header>
 
       <aside class="sidebar" data-trigger="scrollbar">
@@ -68,8 +71,18 @@
             <ul>
                <li>
                   <ul>
+                  @if (Auth::guest())
                      <li class="active">
                         <a href="{{ route('home')}}">
+                           <i class="fa fa-home"></i>
+                           <span>Dashboard</span>
+                        </a>
+                     </li>
+                     @endif
+                     @if (Auth::check() && (Auth::user()->level == 'admin'))
+
+                     <li class="active">
+                        <a href="{{ route('home1')}}">
                            <i class="fa fa-home"></i>
                            <span>Dashboard</span>
                         </a>
@@ -86,6 +99,7 @@
                            <span>Data fakultas</span>
                         </a>
                      </li>
+                     @endif
                   </ul>
                </li>
          </div>

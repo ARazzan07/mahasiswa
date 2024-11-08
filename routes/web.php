@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cmahasiswa;
 use App\Http\Controllers\Cfakultas;
 use App\Http\Controllers\Clogin;
+use App\Events\NamaEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +19,25 @@ use App\Http\Controllers\Clogin;
 
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', [Clogin::class, 'index'])->name('login');
-    Route::post('/', [Clogin::class, 'login_proses'])->name('login_proses');
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/send-event', function () {
+        event(new NamaEvent("Pesan dari server!"));
+        return 'Event dikirim!';
+    });
+    Route::get('/login', [Clogin::class, 'index'])->name('login');
+    Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses');
+    Route::get('/home', function () {return view('welcome');})->name('home');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout');
-    Route::get('/home', function () {return view('welcome');})->name('home');
+    Route::get('/home1', function () {return view('welcome');})->name('home1');
 
     Route::get('/mahasiswa/export-pdf', [Cmahasiswa::class, 'exportPdf'])->name('mahasiswa.pdf');
     Route::get('/mahasiswa/export-excel', [Cmahasiswa::class, 'exportExcel'])->name('mahasiswa.excel');
+    Route::get('/mahasiswa/maps', [Cmahasiswa::class, 'maps'])->name('maps');
 
     Route::resource('mahasiswa', Cmahasiswa::class);
 

@@ -14,7 +14,7 @@ class Mmahasiswa extends Model
     
 
     protected $table = 'mahasiswa';
-    protected $fillable = ['nim','nama','foto','jenis_kelamin','tempat_lahir','tanggal_lahir','fakultas_id'];
+    protected $fillable = ['nim','nama','foto','jenis_kelamin','tempat_lahir','tanggal_lahir','fakultas_id','lat','long'];
 
     public function fakultas()
     {

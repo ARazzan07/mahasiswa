@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="foto">Foto Kaprodi:</label>
+        <label for="foto">Foto Mahasiswa</label>
         
         <!-- Tampilkan gambar lama jika ada -->
         @if($mahasiswa->foto)
@@ -67,6 +67,22 @@
             <option value="{{$f->id}}" {{$mahasiswa->fakultas_id == $f->id ? 'selected' : ''}}>{{$f->prodi}}</option>
             @endforeach
         </select>
+    </div>
+
+    <div class="form-group">
+        <label for="nama">Lat:</label>
+        <input type="double" name="lat" id="nama" class="form-control" required value="{{ old('lat', $mahasiswa->lat) }}">
+        @error('lat')
+            {{ $message }} 
+            @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="nama">Long:</label>
+        <input type="double" name="long" id="nama" class="form-control" required value="{{ old('long', $mahasiswa->long) }}">
+        @error('long')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
