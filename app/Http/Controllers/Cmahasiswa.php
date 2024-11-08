@@ -174,4 +174,17 @@ diupdate');
     return view('maps.maps', compact('locations'));
     }
 
+    public function getRoute(Request $request)
+    {
+        $start = $request->start; // Koordinat pengguna
+        $end = $request->end;     // Koordinat tujuan
+
+        $accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';  // Ganti dengan Mapbox Access Token Anda
+        $url = "https://api.mapbox.com/directions/v5/mapbox/driving/{$start};{$end}?access_token={$accessToken}&alternatives=true&steps=true";
+
+        $response = Http::get($url);  // Menggunakan Laravel HTTP Client
+
+        return response()->json($response->json());  // Mengirimkan response JSON ke frontend
+    }
+
 }

@@ -38,10 +38,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mahasiswa/export-pdf', [Cmahasiswa::class, 'exportPdf'])->name('mahasiswa.pdf');
     Route::get('/mahasiswa/export-excel', [Cmahasiswa::class, 'exportExcel'])->name('mahasiswa.excel');
     Route::get('/mahasiswa/maps', [Cmahasiswa::class, 'maps'])->name('maps');
+    Route::get('/mapbox-routing', [Cmahasiswa::class, 'getRoute']);
 
     Route::resource('mahasiswa', Cmahasiswa::class);
 
-// Export routes for fakultas (PDF and Excel)
     Route::get('/fakultas/export-pdf', [Cfakultas::class, 'exportPdfFakultas'])->name('fakultas.pdf');
     Route::get('/fakultas/export-excel', [Cfakultas::class, 'exportExcel'])->name('fakultas.excel');
 
