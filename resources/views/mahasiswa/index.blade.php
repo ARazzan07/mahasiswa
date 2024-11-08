@@ -4,8 +4,9 @@
 
 
 <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
-<a href="{{ route('excel') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
-<a href="{{ route('pdf') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
+<a href="{{ route('mahasiswa.excel') }}" class="btn btn-primary" title="Export to EXCEL"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
+<a href="{{ route('mahasiswa.pdf') }}" class="btn btn-primary" title="Export to PDF"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
+<div style="overflow-x: auto; ">
 <table class="table table table-bordered"  id="table">
     <thead class="thead-dark">
         <tr>
@@ -34,11 +35,21 @@
             <td> {{ $d->prodi }} </td>
             <td> {{ $d->kaprodi }} </td>
             <td>
-                <form onsubmit="return confirm('Yakin hapus data?');" method="POST" action="{{ route('mahasiswa.destroy', $d->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <a href="{{ route('mahasiswa.edit', $d->id) }}">Edit</a>
-                    <button type="submit">Hapus</button>
+            <form onsubmit="return confirm('Yakin hapus data?');" method="POST"action="{{ route('mahasiswa.destroy', $d->id) }}">
+ @csrf
+@method('DELETE')
+<a href="{{ route('mahasiswa.edit', $d->id) }}" title="Edit Data" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+<button type="submit" class="btn btn-danger" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
+@if(session('status'))
+    <script>
+        Swal.fire({
+        title: "{{session('status')['judul']}}",
+        text: "{{session('status')['pesan']}}",
+        icon: "{{session('status')['icon']}}"
+        });
+    </script>
+@endif
+
                 </form>
 
             </td>
@@ -46,5 +57,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 
 @endsection

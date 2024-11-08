@@ -1,7 +1,10 @@
 @extends('layout.menu')
 @section('konten')
 
-<a href="{{ route('fakultas.create') }}" title="Tambah data">Tambah Data</a>
+<a href="{{ route('fakultas.create') }}" class="btn btn-primary" title="Tambah Data Fakultas"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
+<a href="{{ route('fakultas.excel') }}" class="btn btn-primary" title="Export to EXCEL"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
+<a href="{{ route('fakultas.pdf') }}" class="btn btn-primary" title="Export to PDF"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
+<div>
 <table class="table table table-bordered"  id="table">
     <thead class="thead-dark">
         <tr>
@@ -21,11 +24,21 @@
             <td> {{ $d->kaprodi }} </td>
 
             <td>
-                <form onsubmit="return confirm('Yakin hapus data?');" method="POST" action="{{ route('fakultas.destroy', $d->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <a href="{{ route('fakultas.edit', $d->id) }}">Edit</a>
-                    <button type="submit">Hapus</button>
+            <form onsubmit="return confirm('Yakin hapus data?');" method="POST"action="{{ route('fakultas.destroy', $d->id) }}">
+ @csrf
+@method('DELETE')
+<a href="{{ route('fakultas.edit', $d->id) }}" title="Edit Data" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+<button type="submit" class="btn btn-danger" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
+@if(session('status'))
+    <script>
+        Swal.fire({
+        title: "{{session('status')['judul']}}",
+        text: "{{session('status')['pesan']}}",
+        icon: "{{session('status')['icon']}}"
+        });
+    </script>
+@endif
+
                 </form>
 
             </td>
@@ -33,5 +46,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 
 @endsection

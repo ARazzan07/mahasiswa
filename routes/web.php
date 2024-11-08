@@ -26,11 +26,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout');
     Route::get('/home', function () {return view('welcome');})->name('home');
 
-Route::resource('mahasiswa', Cmahasiswa::class);
+    Route::get('/mahasiswa/export-pdf', [Cmahasiswa::class, 'exportPdf'])->name('mahasiswa.pdf');
+    Route::get('/mahasiswa/export-excel', [Cmahasiswa::class, 'exportExcel'])->name('mahasiswa.excel');
 
-Route::resource('fakultas', Cfakultas::class);
+    Route::resource('mahasiswa', Cmahasiswa::class);
 
-Route::get('/export-pdf', [Cmahasiswa::class, 'exportPdf'])->name('pdf');
-Route::get('/export-excel', [Cmahasiswa::class, 'exportExcel'])->name('excel');
+// Export routes for fakultas (PDF and Excel)
+    Route::get('/fakultas/export-pdf', [Cfakultas::class, 'exportPdfFakultas'])->name('fakultas.pdf');
+    Route::get('/fakultas/export-excel', [Cfakultas::class, 'exportExcel'])->name('fakultas.excel');
+
+    Route::resource('fakultas', Cfakultas::class);
+
 
 });

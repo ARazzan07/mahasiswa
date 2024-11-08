@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Mfakultas;
 use Illuminate\Http\Request;
+use PDF;
+use App\Exports\FakultasExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Cfakultas extends Controller
 {
@@ -84,5 +87,21 @@ disimpan');
         $fakultas->delete();
         return redirect()->route('fakultas.index')->with('success', 'Data siswa berhasil
 diupdate');
+    }
+
+    public function exportPdfFakultas()
+    {
+        $datas = Mfakultas::get(); // Retrieve data for the table
+    
+        // Load the view and pass data
+        $pdf = PDF::loadView('pdf.fakultas', compact('datas'));
+    
+        // Return PDF download
+        return $pdf->stream('table.pdf');
+    }
+    
+        public function exportExcel()
+    {
+        return Excel::download(new FakultasExport, 'table.xlsx');
     }
 }
