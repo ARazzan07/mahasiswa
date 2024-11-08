@@ -22,7 +22,6 @@ class TableExport implements FromCollection, WithHeadings, WithMapping, WithDraw
                 'mahasiswa.id',
                 'mahasiswa.nim',
                 'mahasiswa.nama',
-                'mahasiswa.foto', // Make sure foto is selected
                 'mahasiswa.jenis_kelamin',
                 'mahasiswa.tempat_lahir',
                 'mahasiswa.tanggal_lahir',
@@ -39,7 +38,6 @@ class TableExport implements FromCollection, WithHeadings, WithMapping, WithDraw
             'No',
             'NIM',
             'Nama Lengkap',
-            'Foto Mahasiswa',
             'Jenis Kelamin',
             'Tempat Lahir',
             'Tanggal Lahir',
@@ -55,7 +53,6 @@ class TableExport implements FromCollection, WithHeadings, WithMapping, WithDraw
             $mahasiswa->id,
             $mahasiswa->nim,
             $mahasiswa->nama,
-            '', // Empty cell for photo (will be populated by WithDrawings)
             $mahasiswa->jenis_kelamin,
             $mahasiswa->tempat_lahir,
             $mahasiswa->tanggal_lahir,

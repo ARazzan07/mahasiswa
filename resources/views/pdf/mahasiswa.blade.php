@@ -23,6 +23,7 @@
                 <th>Fakultas</th>
                 <th>Prodi</th>
                 <th>Kaprodi</th>
+                <th>Foto Kaprodi</th>
             </tr>
         </thead>
         <tbody>
@@ -41,9 +42,16 @@
                 <td>{{ $mhs->jenis_kelamin }}</td>
                 <td>{{ $mhs->tempat_lahir }}</td>
                 <td>{{ $mhs->tanggal_lahir }}</td>
-                <td>{{ $mhs->fakultas }}</td>
-                <td>{{ $mhs->prodi }}</td>
-                <td>{{ $mhs->kaprodi }}</td>
+                <td>{{ $mhs->fakultas->fakultas ?? 'N/A' }}</td>
+                <td>{{ $mhs->fakultas->prodi ?? 'N/A' }}</td>
+                <td>{{ $mhs->fakultas->kaprodi ?? 'N/A' }}</td>
+                <td>
+                    @if($mhs->fakultas && $mhs->fakultas->foto)
+                        <img src="{{ public_path('storage/' . str_replace('public/', '', $mhs->fakultas->foto)) }}" width="60" height="60" alt="Foto Kaprodi">
+                    @else
+                        Foto tidak tersedia
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

@@ -20,6 +20,7 @@
             <th>Fakultas</th>
             <th>Prodi</th>
             <th>Kaprodi</th>
+            <th>Foto Kaprodi</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -36,6 +37,13 @@
             <td> {{ $d->fakultas->fakultas ?? '-' }} </td>
             <td> {{ $d->fakultas->prodi ?? '-' }} </td>
             <td> {{ $d->fakultas->kaprodi ?? '-' }} </td>
+            <td>
+                @if($d->fakultas && $d->fakultas->foto)
+                    <img src="{{ Storage::url($d->fakultas->foto) }}" alt="Foto kaprodi" width="100">
+                @else
+                    <span>Foto tidak tersedia</span>
+                @endif
+            </td>
             <td>
             <form onsubmit="return confirm('Yakin hapus data?');" method="POST"action="{{ route('mahasiswa.destroy', $d->id) }}">
  @csrf

@@ -20,6 +20,9 @@ class Cmahasiswa extends Controller
     public function index()
     {
         $mahasiswa = Mmahasiswa::with('fakultas')->get();
+
+        
+        // return public_path('storage/' . str_replace('public/', '', $mahasiswa[0]->fakultas->foto));
         return view('mahasiswa.index', compact('mahasiswa'));
     }
 
@@ -139,16 +142,11 @@ diupdate');
     
     public function exportPdf()
     {
-        $datas = DB::table('mahasiswa')
-        ->leftJoin('fakultas', 'mahasiswa.fakultas_id', '=', 'fakultas.id')
-        ->select('mahasiswa.*', 'fakultas.fakultas','fakultas.prodi','fakultas.kaprodi')
-        ->get(); // Retrieve data for the table
-    
-        // Load the view and pass data
-        $pdf = PDF::loadView('pdf.mahasiswa', compact('datas'))->setPaper('a4', 'landscape');
-    
-        // Return PDF download
-        return $pdf->stream('table.pdf');
+        $datas = Mmahasiswa::with('fakultas')->get();
+
+    $pdf = PDF::loadView('pdf.mahasiswa', compact('datas'))->setPaper('a4', 'landscape');
+
+    return $pdf->stream('table.pdf');
     }
     
         public function exportExcel()

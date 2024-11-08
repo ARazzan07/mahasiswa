@@ -21,7 +21,7 @@ class FakultasExport implements FromCollection, WithHeadings, WithMapping, WithD
      */
     public function collection()
     {
-        return Mfakultas::all();
+        return Mfakultas::select('fakultas', 'prodi', 'kaprodi')->get();
     }
 
     /**
@@ -29,7 +29,7 @@ class FakultasExport implements FromCollection, WithHeadings, WithMapping, WithD
      */
     public function headings(): array
     {
-        return ['Fakultas', 'Prodi', 'Kaprodi', 'Foto'];
+        return ['Fakultas', 'Prodi', 'Kaprodi',];
     }
 
     /**
@@ -41,7 +41,6 @@ class FakultasExport implements FromCollection, WithHeadings, WithMapping, WithD
             $fakultas->fakultas,
             $fakultas->prodi,
             $fakultas->kaprodi,
-            '' // Tempatkan kolom kosong untuk gambar
         ];
     }
 
