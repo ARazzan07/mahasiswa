@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('fakultas');
             $table->string('prodi');
             $table->string('kaprodi');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

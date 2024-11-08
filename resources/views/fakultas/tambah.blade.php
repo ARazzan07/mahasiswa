@@ -1,23 +1,39 @@
 @extends('layout.menu')
 @section('konten')
 
-<form method="POST" action="{{ route('fakultas.store') }}">
+<form method="POST" action="{{ route('fakultas.store') }}"  enctype="multipart/form-data">
     @csrf
 
     <div class="form-group">
         <label for="">Fakultas</label>
         <input type="text" name="fakultas" id="" class="form-control" required>
-        @error('nim') <small class="form-text text-danger">{{ $message }}</small> @enderror
+        @error('fakultas')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
         <label for="">Prodi</label>
         <input type="text" name="prodi" id="" class="form-control" required>
+        @error('prodi')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
         <label for="tempat_lahir">Kaprodi</label>
         <input type="text" name="kaprodi" id="" class="form-control" required>
+        @error('kaprodi')
+            {{ $message }} 
+            @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="nama">Foto Kaprodi:</label>
+        <input type="file" name="foto" id="foto" class="form-control" required>
+        @error('foto')
+            {{ $message }} 
+            @enderror
     </div>
 
  

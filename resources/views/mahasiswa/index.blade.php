@@ -6,13 +6,14 @@
 <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary" title="Tambah Data ruangan"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
 <a href="{{ route('mahasiswa.excel') }}" class="btn btn-primary" title="Export to EXCEL"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
 <a href="{{ route('mahasiswa.pdf') }}" class="btn btn-primary" title="Export to PDF"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
-<div style="overflow-x: auto; ">
-<table class="table table table-bordered"  id="table">
+<div style="overflow-x: auto; max-width: 100%; ">
+<table class="table table table-bordered"  id="table"  style="width: 100%; min-width: 1500px; table-layout: auto;">
     <thead class="thead-dark">
-        <tr>
+         <tr>
             <th>No</th>
             <th>NIM</th>
             <th>Nama Lengkap</th>
+            <th>Foto Mahasiswa</th>
             <th>Jenis Kelamin</th>
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
@@ -28,12 +29,13 @@
             <td> {{ $loop->iteration }} </td>
             <td> {{ $d->nim }} </td>
             <td> {{ $d->nama }} </td>
+            <td><img src="{{ Storage::url($d->foto) }}" alt="Foto mahasiswa" width="100"></td>
             <td> {{ $d->jenis_kelamin }} </td>
             <td> {{ $d->tempat_lahir }} </td>
             <td> {{ $d->tanggal_lahir }} </td>
-            <td> {{ $d->fakultas }} </td>
-            <td> {{ $d->prodi }} </td>
-            <td> {{ $d->kaprodi }} </td>
+            <td> {{ $d->fakultas->fakultas ?? '-' }} </td>
+            <td> {{ $d->fakultas->prodi ?? '-' }} </td>
+            <td> {{ $d->fakultas->kaprodi ?? '-' }} </td>
             <td>
             <form onsubmit="return confirm('Yakin hapus data?');" method="POST"action="{{ route('mahasiswa.destroy', $d->id) }}">
  @csrf

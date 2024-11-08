@@ -4,14 +4,15 @@
 <a href="{{ route('fakultas.create') }}" class="btn btn-primary" title="Tambah Data Fakultas"><i class="far fa-plus-square"></i> &nbsp;Tambah</a>
 <a href="{{ route('fakultas.excel') }}" class="btn btn-primary" title="Export to EXCEL"><i class="far fa-plus-square"></i> &nbsp;Export to EXCEL</a>
 <a href="{{ route('fakultas.pdf') }}" class="btn btn-primary" title="Export to PDF"><i class="far fa-plus-square"></i> &nbsp;Export to PDF</a>
-<div>
-<table class="table table table-bordered"  id="table">
+<div style="overflow-x: auto; max-width: 100%; ">
+<table class="table table table-bordered"  id="table"  style="width: 100%; min-width: 1500px; table-layout: auto;">
     <thead class="thead-dark">
         <tr>
             <th>No</th>
             <th>Fakultas</th>
             <th>Prodi</th>
             <th>Kaprodi</th>
+            <th>Foto Kaprodi</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -22,6 +23,9 @@
             <td> {{ $d->fakultas }} </td>
             <td> {{ $d->prodi }} </td>
             <td> {{ $d->kaprodi }} </td>
+            <td>
+            <img src="{{ Storage::url($d->foto) }}" alt="Foto Fakultas" width="100">
+            </td>
 
             <td>
             <form onsubmit="return confirm('Yakin hapus data?');" method="POST"action="{{ route('fakultas.destroy', $d->id) }}">

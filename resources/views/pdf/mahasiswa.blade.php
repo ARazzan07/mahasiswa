@@ -1,30 +1,52 @@
-<table border="1" class="table table table-bordered"  id="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>No</th>
-            <th>NIM</th>
-            <th>Nama Lengkap</th>
-            <th>Jenis Kelamin</th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Fakultas</th>
-            <th>Prodi</th>
-            <th>Kaprodi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($datas as $d)
-        <tr>
-            <td> {{ $loop->iteration }} </td>
-            <td> {{ $d->nim }} </td>
-            <td> {{ $d->nama }} </td>
-            <td> {{ $d->jenis_kelamin }} </td>
-            <td> {{ $d->tempat_lahir }} </td>
-            <td> {{ $d->tanggal_lahir }} </td>
-            <td> {{ $d->fakultas }} </td>
-            <td> {{ $d->prodi }} </td>
-            <td> {{ $d->kaprodi }} </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+<!-- resources/views/pdf/mahasiswa.blade.php -->
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2>Data Mahasiswa</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>NIM</th>
+                <th>Nama Lengkap</th>
+                <th>Foto Mahasiswa</th>
+                <th>Jenis Kelamin</th>
+                <th>Tempat Lahir</th>
+                <th>Tanggal Lahir</th>
+                <th>Fakultas</th>
+                <th>Prodi</th>
+                <th>Kaprodi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($datas as $index => $mhs)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $mhs->nim }}</td>
+                <td>{{ $mhs->nama }}</td>
+                <td>
+                    @if($mhs->foto)
+                        <img src="{{ public_path('storage/' . str_replace('public/', '', $mhs->foto)) }}" width="60" height="60" alt="Foto">
+                    @else
+                        Tidak ada foto
+                    @endif
+                </td>
+                <td>{{ $mhs->jenis_kelamin }}</td>
+                <td>{{ $mhs->tempat_lahir }}</td>
+                <td>{{ $mhs->tanggal_lahir }}</td>
+                <td>{{ $mhs->fakultas }}</td>
+                <td>{{ $mhs->prodi }}</td>
+                <td>{{ $mhs->kaprodi }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
+</html>

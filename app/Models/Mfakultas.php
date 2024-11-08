@@ -9,5 +9,5 @@ class Mfakultas extends Model
 {
     use HasFactory;
     protected $table = 'fakultas';
-    protected $fillable = ['fakultas','prodi','kaprodi'];
+    protected $fillable = ['fakultas','prodi','kaprodi','foto'];
 }

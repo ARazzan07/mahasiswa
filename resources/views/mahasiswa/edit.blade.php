@@ -1,7 +1,7 @@
 @extends('layout.menu')
 @section('konten')
 
-<form method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id) }}">
+<form method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -14,6 +14,21 @@
     <div class="form-group">
         <label for="nama_lengkap">Nama Lengkap:</label>
         <input type="text" name="nama" id="nama" class="form-control" required value="{{ old('nama', $mahasiswa->nama) }}">
+    </div>
+
+    <div class="form-group">
+        <label for="foto">Foto Kaprodi:</label>
+        
+        <!-- Tampilkan gambar lama jika ada -->
+        @if($mahasiswa->foto)
+            <img src="{{ Storage::url($mahasiswa->foto) }}" alt="Foto Mahasiswa" width="150" class="mb-3">
+        @endif
+
+        <input type="file" name="foto" id="foto" class="form-control">
+        <small class="form-text text-muted">Biarkan kosong jika tidak ingin mengganti foto</small>
+        @error('foto')
+            <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
     </div>
 
     <div class="form-group">

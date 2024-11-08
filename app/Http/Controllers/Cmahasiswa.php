@@ -6,6 +6,7 @@ use App\Models\Mmahasiswa;
 use App\Models\Mfakultas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use PDF;
 use App\Exports\TableExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,12 +19,8 @@ class Cmahasiswa extends Controller
      */
     public function index()
     {
-        $mahasiswa = DB::table('mahasiswa')
-            ->leftJoin('fakultas', 'mahasiswa.fakultas_id', '=', 'fakultas.id')
-            ->select('mahasiswa.*', 'fakultas.fakultas','fakultas.prodi','fakultas.kaprodi')
-            ->get();
-
-            return view ('mahasiswa.index', compact('mahasiswa'));
+        $mahasiswa = Mmahasiswa::with('fakultas')->get();
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -40,15 +37,30 @@ class Cmahasiswa extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nim'           => 'required',
+            'nama'          => 'required',
+            'foto'          => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir'  => 'required',
+            'tanggal_lahir' => 'required',
+            'fakultas_id'   => 'required',
+        ]);
+
+        $fotoPath = $request->file('foto')->store('public/foto');
+
         Mmahasiswa::create([
             'nim'           => $request->nim,
             'nama'          => $request->nama,
+            'foto'          => $fotoPath,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir'  => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'fakultas_id'   => $request->fakultas_id,
 
         ]); 
+
+        $foto = $request->file('foto')->store('public/foto');
 
         return redirect()->route('mahasiswa.index')->with('status', ['judul' => 'Berhasil', 'pesan' =>'Data berhasil disimpan', 'icon' => 'success']);
     }
@@ -78,15 +90,37 @@ class Cmahasiswa extends Controller
     {
         $mahasiswa = Mmahasiswa::findOrFail($id);
 
+        $request->validate([
+            'nim'           => 'required',
+            'nama'          => 'required',
+            'foto'          => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir'  => 'required',
+            'tanggal_lahir' => 'required',
+            'fakultas_id'   => 'required',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            if ($mahasiswa->foto && Storage::exists($mahasiswa->foto)) {
+                Storage::delete($mahasiswa->foto);
+            }
+    
+            $fotoPath = $request->file('foto')->store('public/foto');
+            $mahasiswa->foto = $fotoPath;
+        }
+
         $mahasiswa->update([
             'nim'           => $request->nim,
             'nama'          => $request->nama,
+            'foto'          => $mahasiswa->foto,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir'  => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'fakultas_id'   => $request->fakultas_id,
 
         ]); 
+
+        $mahasiswa->save();
 
         return redirect()->route('mahasiswa.index')->with('status', ['judul' => 'Berhasil', 'pesan' =>'Data berhasil disimpan', 'icon' => 'success']);
     }
@@ -111,7 +145,7 @@ diupdate');
         ->get(); // Retrieve data for the table
     
         // Load the view and pass data
-        $pdf = PDF::loadView('pdf.mahasiswa', compact('datas'));
+        $pdf = PDF::loadView('pdf.mahasiswa', compact('datas'))->setPaper('a4', 'landscape');
     
         // Return PDF download
         return $pdf->stream('table.pdf');

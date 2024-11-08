@@ -1,18 +1,31 @@
 @extends('layout.menu')
 @section('konten')
 
-<form method="POST" action="{{ route('mahasiswa.store') }}">
+<form method="POST" action="{{ route('mahasiswa.store') }}" enctype="multipart/form-data">
     @csrf
 
     <div class="form-group">
         <label for="nis">NIM:</label>
         <input type="text" name="nim" id="nim" class="form-control" required>
-        @error('nim') <small class="form-text text-danger">{{ $message }}</small> @enderror
+        @error('nim')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
         <label for="nama">Nama Lengkap:</label>
         <input type="text" name="nama" id="nama" class="form-control" required>
+        @error('nama')
+            {{ $message }} 
+            @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="nama">Foto Mahasiswa:</label>
+        <input type="file" name="foto" id="foto" class="form-control" required>
+        @error('foto')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
@@ -22,16 +35,25 @@
             <option value="Laki-laki">Laki-laki</option>
             <option value="Perempuan">Perempuan</option>
         </select>
+        @error('jenis_kelamin')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
         <label for="tempat_lahir">Tempat Lahir:</label>
         <textarea name="tempat_lahir" id="tempat_lahir" class="form-control" rows="3"></textarea>
+        @error('tempat_lahir')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
         <label for="tanggal_lahir">Tanggal Lahir:</label>
         <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
+        @error('tanggal_lahir')
+            {{ $message }} 
+            @enderror
     </div>
 
     <div class="form-group">
@@ -42,6 +64,9 @@
             <option value="{{$f->id}}">{{$f->prodi}}</option>
             @endforeach
         </select>
+        @error('fakultas_id')
+            {{ $message }} 
+            @enderror
     </div>
     
     <div class="form-group">
