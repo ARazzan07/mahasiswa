@@ -53,6 +53,7 @@ class Cmahasiswa extends Controller
         ]);
 
         $fotoPath = $request->file('foto')->store('public/foto');
+ 
 
         Mmahasiswa::create([
             'nim'           => $request->nim,

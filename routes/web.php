@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cmahasiswa;
 use App\Http\Controllers\Cfakultas;
 use App\Http\Controllers\Clogin;
+use App\Http\Controllers\ChatController;
 use App\Events\NamaEvent;
 
 /*
@@ -22,16 +23,17 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
-    Route::get('/send-event', function () {
-        event(new NamaEvent("Pesan dari server!"));
-        return 'Event dikirim!';
-    });
+    
+
     Route::get('/login', [Clogin::class, 'index'])->name('login');
     Route::post('/login', [Clogin::class, 'login_proses'])->name('login_proses');
     Route::get('/home', function () {return view('welcome');})->name('home');
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    
+    
     Route::get('/logout', [Clogin::class, 'logout'])->name('logout');
     Route::get('/home1', function () {return view('welcome');})->name('home1');
 
@@ -46,6 +48,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/fakultas/export-excel', [Cfakultas::class, 'exportExcel'])->name('fakultas.excel');
 
     Route::resource('fakultas', Cfakultas::class);
+
+    
 
 
 });

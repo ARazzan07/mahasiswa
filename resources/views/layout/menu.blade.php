@@ -41,7 +41,7 @@
       <header class="navbar navbar-fixed">
          <div class="navbar--header">
             <a href="#" class="logo">
-               <h3>SMK Telkom</h3>
+               <h3>NeumediraDev</h3>
             </a>
          </div>
 
@@ -93,6 +93,12 @@
                            <span>Data Mahasiswa</span>
                         </a>
                      </li>
+                     <!-- <li>
+                        <a href="{{ route('maps')}}">
+                           <i class="far fa-calendar-alt"></i>
+                           <span>maps</span>
+                        </a>
+                     </li> -->
                      <li>
                         <a href="{{ route('fakultas.index')}}">
                            <i class="far fa-calendar-alt"></i>
@@ -115,7 +121,7 @@
             </div>
          </section>
          <footer class="main--footer main--footer-light">
-            SMK Telkom Banjarbaru 2024
+            RazzanDev 2024
          </footer>
       </main>
    </div>
