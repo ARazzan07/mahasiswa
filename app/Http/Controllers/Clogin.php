@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class Clogin extends Controller
 {
     public function index()
@@ -16,38 +14,31 @@ class Clogin extends Controller
     }
 
     public function login_proses(Request $request)
-    {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ], [
-            'username.required' => 'Username wajib diisi',
-            'password.required' => 'Password wajib diisi',
-        ]);
-        $data = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
-            $credentials = $request->only('username', 'password');
-            $user = User::where('username', $request->username)->first();
-        if (!$user) {
-            return redirect()->route('login')->withErrors(['username' => 'Username tidak ditemukan']);
-        }
-        if (!Auth::attempt($credentials)) {
-            return redirect()->route('login')->withErrors(['password' => 'Password salah']);
-        }
-        if (Auth::attempt($data)) {
-            return redirect()->route('home');
-        } else {
-            return redirect()->route('login')->with('failed', 'Username atau password salah');
-        }
+{
+    $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+    ]);
+
+    $credentials = $request->only('username', 'password');
+    $user = User::where('username', $request->username)->first();
+
+    if (!$user) {
+        return redirect()->route('login')->withErrors(['username' => 'Username tidak ditemukan']);
     }
+
+    if (!Auth::attempt($credentials)) {
+        return redirect()->route('login')->withErrors(['password' => 'Password salah']);
+    }
+
+    // Jika login berhasil
+    return redirect()->route('home')->with('success', 'Login berhasil!');
+}
+
 
     public function logout()
     {
         Auth::logout();
-            return redirect()->route('login')->with('logout', 'Berhasil Logout');
+        return redirect()->route('home')->with('logout', 'Berhasil Logout');
     }
-
-   
 }

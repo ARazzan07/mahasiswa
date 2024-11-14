@@ -42,7 +42,7 @@
 
     <div class="form-group">
         <label for="tempat_lahir">Tempat Lahir:</label>
-        <textarea name="tempat_lahir" id="tempat_lahir" class="form-control" rows="3"></textarea>
+        <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required>
         @error('tempat_lahir')
             {{ $message }} 
             @enderror

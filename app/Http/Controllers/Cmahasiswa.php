@@ -48,8 +48,8 @@ class Cmahasiswa extends Controller
             'tempat_lahir'  => 'required',
             'tanggal_lahir' => 'required',
             'fakultas_id'   => 'required',
-            'lat'   => 'required',
-            'long'   => 'required',
+            'lat'           => 'required',
+            'long'          => 'required',
         ]);
 
         $fotoPath = $request->file('foto')->store('public/foto');
@@ -63,8 +63,8 @@ class Cmahasiswa extends Controller
             'tempat_lahir'  => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'fakultas_id'   => $request->fakultas_id,
-            'lat'   => $request->lat,
-            'long'   => $request->long,
+            'lat'           => $request->lat,
+            'long'          => $request->long,
 
         ]); 
 
@@ -106,8 +106,8 @@ class Cmahasiswa extends Controller
             'tempat_lahir'  => 'required',
             'tanggal_lahir' => 'required',
             'fakultas_id'   => 'required',
-            'lat'   => 'required',
-            'long'   => 'required',
+            'lat'           => 'required',
+            'long'          => 'required',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -127,8 +127,8 @@ class Cmahasiswa extends Controller
             'tempat_lahir'  => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'fakultas_id'   => $request->fakultas_id,
-            'lat'   => $request->lat,
-            'long'   => $request->long,
+            'lat'           => $request->lat,
+            'long'          => $request->long,
 
         ]); 
 

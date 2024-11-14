@@ -48,7 +48,7 @@
 <body>
 
 <div class="chat-container">
-    @if (Auth::check() && Auth::user()->level == 'admin')
+    @if (Auth::check() && (Auth::user()->level == 'admin' || Auth::user()->level == 'user'))
     <h2>Admin Chat</h2>
 
 <h3>Connected Guests:</h3>
@@ -108,7 +108,7 @@
     @else
     <p>Silakan login untuk melanjutkan.</p>
             <a href="{{ route('login') }}" class="btn btn-primary" title="Login"><i class="far fa-plus-square"></i> &nbsp;Login</a>
-            <br>
+            <a href="{{ route('auth.google') }}" class="btn btn-primary" title="Login"><i class="far fa-plus-square"></i> &nbsp;Login With Google</a>
             <h2>Guest Chat</h2>
     <ul id="messages"></ul>
     <form id="form" action="">

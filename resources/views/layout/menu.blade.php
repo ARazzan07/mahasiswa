@@ -50,19 +50,24 @@
          </a>
          @if (Auth::check() && in_array(Auth::user()->level, ['admin', 'user'])) 
          <div class="navbar--nav ml-auto">
-            <ul class="nav">
-               <li class="nav-item dropdown nav--user online">
-                  <a href="#" class="nav-link" data-toggle="dropdown">
-                     <span>{{ Auth::user()->name }}</span>
-                     <i class="fa fa-angle-down"></i>
-                  </a>
-                  <ul class="dropdown-menu">
-                     <li><a href="#"><i class="far fa-user"></i>{{ Auth::user()->name }}</a></li>
-                     <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i>Logout</a></li>
-                  </ul>
-               </li>
+    <ul class="nav">
+        <li class="nav-item dropdown nav--user online">
+            <a href="#" class="nav-link" data-toggle="dropdown">
+                @if(Auth::check() && Auth::user()->avatar)
+                    <img src="{{ Auth::user()->avatar }}" alt="Profile Image" class="rounded-circle" width="30" height="30">
+                @endif
+                <span>{{ Auth::user()->name }}</span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#"><i class="far fa-user"></i>{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('logout') }}"><i class="fa fa-power-off"></i>Logout</a></li>
             </ul>
-         </div>
+        </li>
+    </ul>
+</div>
+
+
          @endif
       </header>
 
@@ -79,7 +84,7 @@
                         </a>
                      </li>
                      @endif
-                     @if (Auth::check() && (Auth::user()->level == 'admin'))
+                     @if (Auth::check() && (Auth::user()->level == 'admin' || Auth::user()->level == 'user'))
 
                      <li class="active">
                         <a href="{{ route('home1')}}">
@@ -147,6 +152,8 @@
    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+
 
    <!-- Page Level Scripts -->
 </body>
@@ -155,4 +162,4 @@
 
 <script>
    new DataTable('#table');
-</script>
+</>
